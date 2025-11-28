@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ALL_CONTENT } from '../lib/data';
 import { ArrowRight } from 'lucide-react';
+import { PostContent, WordContent, BookContent, DemoContent } from '../lib/types';
 
 export default function HomePage() {
     const recent = ALL_CONTENT.slice(0, 3);
@@ -32,11 +33,21 @@ export default function HomePage() {
                 
                 <div className="grid md:grid-cols-3 gap-8">
                     {recent.map(item => {
-                         const path = `/${item.type === 'book' ? 'library' : item.type === 'demo' ? 'engineering' : item.type + 's'}/${item.id}`;
+                         // Extract the slug without the collection prefix
+                         const slugWithoutPrefix = item.slug.split('/')[1];
+                         const path = `/${item.type === 'book' ? 'library' : item.type === 'demo' ? 'engineering' : item.type + 's'}/${slugWithoutPrefix}`;
+                         
+                         // Get description based on content type
+                         let description = item.description;
+                         if (!description && item.type === 'book') {
+                             description = (item as BookContent).summary;
+                         } else if (!description && item.type === 'word') {
+                             description = (item as WordContent).definition;
+                         }
                          
                          return (
                             <Link 
-                                key={item.id} 
+                                key={item.slug} 
                                 href={path}
                                 className="group flex flex-col h-full"
                             >
@@ -53,7 +64,7 @@ export default function HomePage() {
                                     </h3>
                                     
                                     <p className="text-sm text-ink-light dark:text-zinc-500 line-clamp-3 leading-relaxed">
-                                        {item.description || (item as any).summary || (item as any).definition}
+                                        {description}
                                     </p>
                                 </div>
                             </Link>

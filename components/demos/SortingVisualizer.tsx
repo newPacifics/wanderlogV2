@@ -56,7 +56,7 @@ const SortingVisualizer: React.FC<SortingVisualizerProps> = ({ isActive }) => {
         const arr = [...array];
 
         for (let i = 1; i < arr.length; i++) {
-            let current = arr[i];
+            const current = arr[i];
             let j = i - 1;
             setActiveIndices([i]);
             

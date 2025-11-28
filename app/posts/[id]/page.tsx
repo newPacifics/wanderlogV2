@@ -1,20 +1,21 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
-import { ALL_CONTENT } from '../../../lib/data';
-import { ContentType, PostContent } from '../../../lib/types';
+import { posts } from '../../../.velite';
 
-export default function PostDetailPage({ params }: { params: { id: string } }) {
-    const item = ALL_CONTENT.find(i => i.id === params.id && i.type === ContentType.POST);
+export default async function PostDetailPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const post = posts.find(p => p.slug === `posts/${id}`);
 
-    if (!item) {
+    if (!post) {
         notFound();
     }
 
-    const post = item as PostContent;
     const accentColorText = 'text-blue-600 dark:text-blue-400';
+    
+    // Create the MDX component from the content string
+    const MDXContent = new Function(post.content)().default;
 
     return (
         <article className="max-w-3xl mx-auto py-16 px-6 md:px-12 animate-fade-in">
@@ -29,24 +30,24 @@ export default function PostDetailPage({ params }: { params: { id: string } }) {
             <header className="mb-12 border-b border-paper-200 dark:border-zinc-800 pb-12">
                 <div className="flex flex-wrap items-center gap-4 mb-6 text-xs font-sans tracking-widest uppercase text-ink-light dark:text-zinc-500">
                     <span className={`px-2.5 py-1 rounded-sm bg-paper-200 dark:bg-zinc-800 text-ink dark:text-zinc-300 font-bold`}>
-                        {item.type}
+                        {post.type}
                     </span>
-                    <span className="flex items-center gap-1"><Calendar size={12}/> {item.date}</span>
+                    <span className="flex items-center gap-1"><Calendar size={12}/> {post.date}</span>
                     <span>{post.readingTime}</span>
                 </div>
                 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-ink dark:text-white mb-4 leading-[1.1]">
-                    {item.title}
+                    {post.title}
                 </h1>
             </header>
 
             <div className="prose prose-lg dark:prose-invert font-serif prose-blue max-w-none prose-headings:font-serif prose-headings:font-medium prose-p:leading-loose prose-a:no-underline prose-a:border-b prose-a:border-current hover:prose-a:opacity-70 transition-all">
-                <ReactMarkdown>{post.content}</ReactMarkdown>
+                <MDXContent />
             </div>
 
             {/* Tags Footer */}
             <div className="mt-20 pt-10 border-t border-paper-200 dark:border-zinc-800 flex flex-wrap gap-3">
-                {item.tags.map(tag => (
+                {post.tags.map(tag => (
                     <span key={tag} className="flex items-center gap-1.5 px-3 py-1.5 bg-paper-100 dark:bg-zinc-800/50 text-ink-light dark:text-zinc-400 text-xs rounded-full font-sans hover:bg-paper-200 dark:hover:bg-zinc-800 transition-colors">
                         <Tag size={10} />
                         {tag}
