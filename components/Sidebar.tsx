@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BookOpen, PenTool, Hash, Cpu, Home, X, Sun, Moon } from 'lucide-react';
 import { ContentType, NavItem } from '../lib/types';
+import { SITE_NAME, SITE_TAGLINE, NAV_LABELS, UI_TEXT } from '../lib/constants';
 
 interface SidebarProps {
     isOpen: boolean;
@@ -14,11 +15,11 @@ interface SidebarProps {
 }
 
 const NAV_ITEMS: NavItem[] = [
-    { label: 'Overview', path: '/', icon: <Home size={18} /> },
-    { label: 'Essays', path: '/posts', icon: <PenTool size={18} />, type: ContentType.POST },
-    { label: 'Lexicon', path: '/words', icon: <Hash size={18} />, type: ContentType.WORD },
-    { label: 'Library', path: '/library', icon: <BookOpen size={18} />, type: ContentType.BOOK },
-    { label: 'Lab', path: '/engineering', icon: <Cpu size={18} />, type: ContentType.DEMO },
+    { label: NAV_LABELS.overview, path: '/', icon: <Home size={18} /> },
+    { label: NAV_LABELS.essays, path: '/posts', icon: <PenTool size={18} />, type: ContentType.POST },
+    { label: NAV_LABELS.lexicon, path: '/words', icon: <Hash size={18} />, type: ContentType.WORD },
+    { label: NAV_LABELS.library, path: '/library', icon: <BookOpen size={18} />, type: ContentType.BOOK },
+    { label: NAV_LABELS.lab, path: '/engineering', icon: <Cpu size={18} />, type: ContentType.DEMO },
 ];
 
 export function Sidebar({ isOpen, setIsOpen, theme, toggleTheme }: SidebarProps) {
@@ -47,7 +48,7 @@ export function Sidebar({ isOpen, setIsOpen, theme, toggleTheme }: SidebarProps)
                 <div className="p-8 pb-4 flex justify-between items-center">
                     <Link href="/" className="group">
                         <h1 className="text-2xl font-serif font-bold tracking-tight text-ink dark:text-white group-hover:opacity-80 transition-opacity">
-                            Lumina
+                            {SITE_NAME}
                         </h1>
                     </Link>
                     <button onClick={() => setIsOpen(false)} className="md:hidden text-ink-light hover:text-ink transition-colors">
@@ -58,7 +59,7 @@ export function Sidebar({ isOpen, setIsOpen, theme, toggleTheme }: SidebarProps)
                 {/* Subtitle */}
                 <div className="px-8 pb-10">
                      <p className="text-sm text-ink-light dark:text-zinc-500 italic font-serif leading-relaxed">
-                        A digital garden of thoughts, silence, and code.
+                        {SITE_TAGLINE}
                     </p>
                 </div>
 
@@ -99,7 +100,7 @@ export function Sidebar({ isOpen, setIsOpen, theme, toggleTheme }: SidebarProps)
                         onClick={toggleTheme}
                         className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg border border-paper-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs font-sans font-medium uppercase tracking-wider text-ink-light hover:border-paper-300 dark:hover:border-zinc-700 transition-all shadow-sm"
                     >
-                        <span>{theme === 'light' ? 'Light Mode' : 'Dark Mode'}</span>
+                        <span>{theme === 'light' ? UI_TEXT.theme.light : UI_TEXT.theme.dark}</span>
                         {theme === 'light' ? <Sun size={14} /> : <Moon size={14} />}
                     </button>
                 </div>

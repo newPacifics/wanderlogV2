@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
 import { words } from '../../../.velite';
+import { UI_TEXT } from '../../../lib/constants';
 
 export default async function WordDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
@@ -19,7 +20,7 @@ export default async function WordDetailPage({ params }: { params: Promise<{ id:
                 className="group flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-widest text-ink-light hover:text-ink dark:text-zinc-500 dark:hover:text-zinc-300 mb-12 transition-colors"
             >
                 <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-                Return
+                {UI_TEXT.buttons.return}
             </Link>
 
             <header className="mb-12 border-b border-paper-200 dark:border-zinc-800 pb-12">
@@ -38,7 +39,7 @@ export default async function WordDetailPage({ params }: { params: Promise<{ id:
             <div className="space-y-12 animate-slide-up">
                 <div className="bg-paper-50 dark:bg-zinc-800/40 p-10 rounded-xl border border-paper-200 dark:border-zinc-800 text-center relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-200 opacity-50"></div>
-                    <h3 className="text-xs font-sans uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400 mb-6">Definition</h3>
+                    <h3 className="text-xs font-sans uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400 mb-6">{UI_TEXT.labels.definition}</h3>
                     <p className="text-3xl md:text-4xl font-serif text-ink dark:text-white leading-relaxed font-medium">
                         {word.definition}
                     </p>
@@ -46,13 +47,13 @@ export default async function WordDetailPage({ params }: { params: Promise<{ id:
                  <div className="grid md:grid-cols-2 gap-8">
                     <div className="p-8 bg-white dark:bg-zinc-900 rounded-lg border border-paper-100 dark:border-zinc-800 shadow-sm">
                         <h3 className="text-xs font-sans uppercase tracking-[0.2em] text-ink-light dark:text-zinc-500 mb-4 flex items-center gap-2">
-                            Etymology
+                            {UI_TEXT.labels.etymology}
                         </h3>
                         <p className="font-serif italic text-xl text-ink dark:text-zinc-300">{word.etymology}</p>
                     </div>
                     <div className="p-8 bg-white dark:bg-zinc-900 rounded-lg border border-paper-100 dark:border-zinc-800 shadow-sm">
                         <h3 className="text-xs font-sans uppercase tracking-[0.2em] text-ink-light dark:text-zinc-500 mb-4">
-                            Usage
+                            {UI_TEXT.labels.usage}
                         </h3>
                         <p className="font-serif text-xl text-ink dark:text-zinc-300">&quot;{word.usage}&quot;</p>
                     </div>

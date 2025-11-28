@@ -2,20 +2,21 @@ import React from 'react';
 import Link from 'next/link';
 import { words } from '../../.velite';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { PAGES, UI_TEXT } from '../../lib/constants';
 
 export default function WordsPage() {
     const items = words;
-    const title = 'Lexicon';
-    const description = 'A collection of beautiful, specific, or untranslatable words.';
-    const accentColor = 'text-emerald-700 dark:text-emerald-300';
-    const basePath = '/words';
+    const title = PAGES.words.title;
+    const description = PAGES.words.description;
+    const accentColor = PAGES.words.accentColor;
+    const basePath = PAGES.words.basePath;
 
     return (
         <div className="max-w-3xl mx-auto py-20 px-6 animate-fade-in">
             <header className="mb-20">
                 <div className="flex items-center gap-2 mb-4 text-ink-light dark:text-zinc-500">
                     <Sparkles size={16} />
-                    <span className="text-xs font-sans uppercase tracking-widest">{items.length} Entries</span>
+                    <span className="text-xs font-sans uppercase tracking-widest">{items.length} {UI_TEXT.labels.entries}</span>
                 </div>
                 <h1 className="text-5xl md:text-6xl font-serif font-medium mb-6 text-ink dark:text-white tracking-tight">{title}</h1>
                 <p className="text-xl text-ink-light dark:text-zinc-400 font-serif leading-relaxed max-w-2xl border-l-2 border-paper-300 dark:border-zinc-700 pl-6">
@@ -26,7 +27,7 @@ export default function WordsPage() {
             <div className="space-y-16">
                 {items.length === 0 && (
                     <div className="p-12 text-center bg-paper-50 dark:bg-zinc-800/30 rounded-lg border border-paper-200 dark:border-zinc-800">
-                        <p className="text-ink-light italic font-serif text-lg">The garden bed is prepared, but seeds have not yet been planted.</p>
+                        <p className="text-ink-light italic font-serif text-lg">{UI_TEXT.emptyState}</p>
                     </div>
                 )}
                 
@@ -69,7 +70,7 @@ export default function WordsPage() {
                                 href={`${basePath}/${wordSlug}`}
                                 className={`inline-flex items-center gap-1 text-xs font-sans font-bold uppercase tracking-wider hover:gap-2 transition-all ${accentColor}`}
                             >
-                                Read Entry <ArrowRight size={14} />
+                                {UI_TEXT.buttons.readEntry} <ArrowRight size={14} />
                             </Link>
                         </article>
                     );

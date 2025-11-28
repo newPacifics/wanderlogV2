@@ -3,31 +3,29 @@ import Link from 'next/link';
 import { ALL_CONTENT } from '../lib/data';
 import { ArrowRight } from 'lucide-react';
 import { PostContent, WordContent, BookContent, DemoContent } from '../lib/types';
+import { PAGES, UI_TEXT } from '../lib/constants';
 
 export default function HomePage() {
     const recent = ALL_CONTENT.slice(0, 3);
 
     return (
-        <div className="max-w-4xl mx-auto py-20 px-6 md:px-12 animate-fade-in">
+        <div className="max-w-5xl mx-auto py-20 px-6 md:px-12 animate-fade-in">
             <section className="mb-24">
                 <h1 className="text-5xl md:text-7xl font-serif font-medium text-ink dark:text-white mb-8 tracking-tight leading-[1.1]">
-                    A quiet place for<br className="hidden md:block" /> loud ideas.
+                    {PAGES.home.title}<br className="hidden md:block" /> {PAGES.home.titleContinued}
                 </h1>
                 <div className="prose prose-xl dark:prose-invert font-serif text-ink-light dark:text-zinc-400 max-w-2xl leading-relaxed">
                     <p>
-                        Welcome to my digital garden. This is a space for slow thinking, curated words, and engineered artifacts.
-                    </p>
-                    <p>
-                        Unlike a traditional blog, the goal here isn&apos;t volume, but clarity. I write to understand, code to visualize, and collect words that capture the ineffable.
+                        {PAGES.home.intro1}
                     </p>
                 </div>
             </section>
 
             <section>
                 <div className="flex items-center justify-between mb-10 pb-4 border-b border-paper-200 dark:border-zinc-800">
-                    <h2 className="text-xs font-sans font-semibold uppercase tracking-widest text-ink-light dark:text-zinc-500">Recently Tended</h2>
+                    <h2 className="text-xs font-sans font-semibold uppercase tracking-widest text-ink-light dark:text-zinc-500">{PAGES.home.recentlyTendedLabel}</h2>
                     <Link href="/posts" className="text-xs font-sans font-medium uppercase tracking-wider text-leaf hover:text-ink transition-colors flex items-center gap-1">
-                        View Archive <ArrowRight size={12} />
+                        {UI_TEXT.buttons.viewArchive} <ArrowRight size={12} />
                     </Link>
                 </div>
                 

@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Tag } from 'lucide-react';
 import { engineering } from '../../../.velite';
 import SortingVisualizer from '../../../components/demos/SortingVisualizer';
 import FractalTree from '../../../components/demos/FractalTree';
+import { UI_TEXT } from '../../../lib/constants';
 
 export default async function DemoDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
@@ -21,7 +22,7 @@ export default async function DemoDetailPage({ params }: { params: Promise<{ id:
                 className="group flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-widest text-ink-light hover:text-ink dark:text-zinc-500 dark:hover:text-zinc-300 mb-12 transition-colors"
             >
                 <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-                Return
+                {UI_TEXT.buttons.return}
             </Link>
 
             <header className="mb-12 border-b border-paper-200 dark:border-zinc-800 pb-12">
@@ -46,7 +47,7 @@ export default async function DemoDetailPage({ params }: { params: Promise<{ id:
                 </div>
 
                 <div className="bg-paper-50 dark:bg-zinc-800/50 p-6 rounded-lg border border-paper-200 dark:border-zinc-800 text-sm text-ink-light dark:text-zinc-400 font-mono">
-                    <strong className="text-ink dark:text-zinc-200">Instructions:</strong> {demo.instructions}
+                    <strong className="text-ink dark:text-zinc-200">{UI_TEXT.labels.instructions}:</strong> {demo.instructions}
                 </div>
             </div>
 

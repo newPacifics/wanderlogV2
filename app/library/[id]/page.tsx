@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Calendar, Tag, Quote } from 'lucide-react';
 import { library } from '../../../.velite';
+import { UI_TEXT } from '../../../lib/constants';
 
 export default async function BookDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
@@ -19,7 +20,7 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
                 className="group flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-widest text-ink-light hover:text-ink dark:text-zinc-500 dark:hover:text-zinc-300 mb-12 transition-colors"
             >
                 <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-                Return
+                {UI_TEXT.buttons.return}
             </Link>
 
             <header className="mb-12 border-b border-paper-200 dark:border-zinc-800 pb-12">
@@ -35,14 +36,14 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
                 </h1>
                 
                 <p className="text-2xl font-serif italic text-amber-700/80 dark:text-amber-400/80 mt-4">
-                    by {book.author}
+                    {UI_TEXT.labels.by} {book.author}
                 </p>
             </header>
 
             <div className="space-y-12 animate-slide-up">
                 <div className="flex flex-col gap-6">
                      <div className="prose prose-lg dark:prose-invert font-serif prose-amber max-w-none">
-                        <h3 className="font-sans text-xs uppercase tracking-widest text-ink-light dark:text-zinc-500 mb-4">Summary</h3>
+                        <h3 className="font-sans text-xs uppercase tracking-widest text-ink-light dark:text-zinc-500 mb-4">{UI_TEXT.labels.summary}</h3>
                         <p className="lead">{book.summary}</p>
                     </div>
                 </div>
@@ -50,7 +51,7 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
                 {book.quotes.length > 0 && (
                     <div className="space-y-8">
                         <h3 className="font-sans text-xs uppercase tracking-widest text-ink-light dark:text-zinc-500 border-b border-paper-200 dark:border-zinc-800 pb-4">
-                            Marginalia & Quotes
+                            {UI_TEXT.labels.quotesSection}
                         </h3>
                         <div className="grid gap-6">
                         {book.quotes.map((quote, idx) => (
