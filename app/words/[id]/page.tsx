@@ -1,4 +1,5 @@
 import React from 'react';
+import * as runtime from 'react/jsx-runtime';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
@@ -12,6 +13,10 @@ export default async function WordDetailPage({ params }: { params: Promise<{ id:
     if (!word) {
         notFound();
     }
+    
+    // Create the MDX component from the content string
+    const getMDXContent = new Function(word.content);
+    const MDXContent = getMDXContent({ React, ...runtime }).default;
 
     return (
         <article className="max-w-3xl mx-auto py-16 px-6 md:px-12 animate-fade-in">
@@ -34,30 +39,16 @@ export default async function WordDetailPage({ params }: { params: Promise<{ id:
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium text-ink dark:text-white mb-4 leading-[1.1]">
                     {word.title}
                 </h1>
+                
+                {word.subtitle && (
+                    <p className="text-xl text-ink-light dark:text-zinc-400 font-serif leading-relaxed">
+                        {word.subtitle}
+                    </p>
+                )}
             </header>
 
-            <div className="space-y-12 animate-slide-up">
-                <div className="bg-paper-50 dark:bg-zinc-800/40 p-10 rounded-xl border border-paper-200 dark:border-zinc-800 text-center relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-200 opacity-50"></div>
-                    <h3 className="text-xs font-sans uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400 mb-6">{UI_TEXT.labels.definition}</h3>
-                    <p className="text-3xl md:text-4xl font-serif text-ink dark:text-white leading-relaxed font-medium">
-                        {word.definition}
-                    </p>
-                </div>
-                 <div className="grid md:grid-cols-2 gap-8">
-                    <div className="p-8 bg-white dark:bg-zinc-900 rounded-lg border border-paper-100 dark:border-zinc-800 shadow-sm">
-                        <h3 className="text-xs font-sans uppercase tracking-[0.2em] text-ink-light dark:text-zinc-500 mb-4 flex items-center gap-2">
-                            {UI_TEXT.labels.etymology}
-                        </h3>
-                        <p className="font-serif italic text-xl text-ink dark:text-zinc-300">{word.etymology}</p>
-                    </div>
-                    <div className="p-8 bg-white dark:bg-zinc-900 rounded-lg border border-paper-100 dark:border-zinc-800 shadow-sm">
-                        <h3 className="text-xs font-sans uppercase tracking-[0.2em] text-ink-light dark:text-zinc-500 mb-4">
-                            {UI_TEXT.labels.usage}
-                        </h3>
-                        <p className="font-serif text-xl text-ink dark:text-zinc-300">&quot;{word.usage}&quot;</p>
-                    </div>
-                </div>
+            <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-serif prose-p:font-serif prose-p:text-ink dark:prose-p:text-zinc-300 animate-slide-up">
+                <MDXContent />
             </div>
 
             {/* Tags Footer */}

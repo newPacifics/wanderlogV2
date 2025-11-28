@@ -56,15 +56,11 @@ export default function WordsPage() {
                                 </Link>
                             </div>
 
-                            <div className="mb-3">
-                                <span className="font-serif italic text-lg text-emerald-700/70 dark:text-emerald-400/70">
-                                    {word.etymology}
-                                </span>
-                            </div>
-
-                            <p className="text-ink-light dark:text-zinc-400 font-serif text-lg leading-relaxed line-clamp-3 mb-4">
-                                {word.definition}
-                            </p>
+                            {word.subtitle && (
+                                <p className="text-ink-light dark:text-zinc-400 font-serif text-lg leading-relaxed line-clamp-3 mb-4">
+                                    {word.subtitle}
+                                </p>
+                            )}
 
                             <Link 
                                 href={`${basePath}/${wordSlug}`}

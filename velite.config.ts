@@ -21,13 +21,12 @@ const words = defineCollection({
   pattern: 'words/**/*.mdx',
   schema: s.object({
     title: s.string(),
+    subtitle: s.string().optional(),
     date: s.string(),
     tags: s.array(s.string()),
-    definition: s.string(),
-    etymology: s.string(),
-    usage: s.string(),
+    content: s.mdx(),
     slug: s.path(),
-  }).transform(data => ({ ...data, type: 'word' as const, description: data.definition })),
+  }).transform(data => ({ ...data, type: 'word' as const, description: data.subtitle })),
 });
 
 // Define the library (books) collection

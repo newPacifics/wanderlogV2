@@ -1,4 +1,5 @@
 import React from 'react';
+import * as runtime from 'react/jsx-runtime';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
@@ -16,7 +17,8 @@ export default async function PostDetailPage({ params }: { params: Promise<{ id:
     const accentColorText = 'text-blue-600 dark:text-blue-400';
     
     // Create the MDX component from the content string
-    const MDXContent = new Function(post.content)().default;
+    const getMDXContent = new Function(post.content);
+    const MDXContent = getMDXContent({ React, ...runtime }).default;
 
     return (
         <article className="max-w-3xl mx-auto py-16 px-6 md:px-12 animate-fade-in">
