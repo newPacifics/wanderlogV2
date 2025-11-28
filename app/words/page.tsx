@@ -1,4 +1,5 @@
 import React from 'react';
+import * as runtime from 'react/jsx-runtime';
 import Link from 'next/link';
 import { words } from '../../.velite';
 import { ArrowRight, Sparkles } from 'lucide-react';
@@ -24,43 +25,52 @@ export default function WordsPage() {
                 </p>
             </header>
 
-            <div className="space-y-16">
-                {items.length === 0 && (
-                    <div className="p-12 text-center bg-paper-50 dark:bg-zinc-800/30 rounded-lg border border-paper-200 dark:border-zinc-800">
-                        <p className="text-ink-light italic font-serif text-lg">{UI_TEXT.emptyState}</p>
-                    </div>
-                )}
-                
+            {items.length === 0 && (
+                <div className="p-12 text-center bg-paper-50 dark:bg-zinc-800/30 rounded-lg border border-paper-200 dark:border-zinc-800">
+                    <p className="text-ink-light italic font-serif text-lg">{UI_TEXT.emptyState}</p>
+                </div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {items.map((word) => {
                     // Extract the slug without the 'words/' prefix
                     const wordSlug = word.slug.replace('words/', '');
                     
+                    // Create the MDX component from the content string
+                    const getMDXContent = new Function(word.content);
+                    const MDXContent = getMDXContent({ React, ...runtime }).default;
+                    
                     return (
-                        <article key={word.slug} className="group relative pl-8 border-l border-paper-200 dark:border-zinc-800 hover:border-leaf/50 dark:hover:border-leaf/50 transition-colors duration-300">
-                            <div className="absolute -left-[5px] top-0 w-[9px] h-[9px] rounded-full bg-paper-200 dark:bg-zinc-800 group-hover:bg-leaf transition-colors duration-300" />
-                            
-                            <div className="flex flex-col gap-3 mb-3">
-                                <div className="flex items-center gap-3 text-[10px] font-sans font-bold tracking-widest uppercase text-ink-light dark:text-zinc-500">
-                                    <span>{word.date}</span>
-                                    {word.tags.slice(0, 3).map(tag => (
-                                        <span key={tag} className="px-1.5 py-0.5 rounded-sm bg-paper-100 dark:bg-zinc-800/50">
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-
+                        <div 
+                            key={word.slug} 
+                            className="p-6 rounded-xl bg-white dark:bg-white/5 border border-slate-100 dark:border-white/5 hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-300 shadow-sm hover:shadow-md group"
+                        >
+                            <div className="flex justify-between items-start mb-2">
                                 <Link href={`${basePath}/${wordSlug}`} className="block">
-                                    <h2 className={`text-3xl font-serif font-medium group-hover:${accentColor} transition-colors text-ink dark:text-zinc-100 leading-tight`}>
+                                    <h3 className="text-xl font-serif font-bold text-ink dark:text-chalk group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">
                                         {word.title}
-                                    </h2>
+                                    </h3>
                                 </Link>
+                                {word.tags.length > 0 && (
+                                    <span className="text-xs font-mono text-slate-400 bg-slate-50 dark:bg-black/20 px-2 py-1 rounded">
+                                        {word.tags[0]}
+                                    </span>
+                                )}
                             </div>
-
+                            
+                            <div className="text-xs font-sans text-slate-400 mb-2">
+                                {word.date}
+                            </div>
+                            
                             {word.subtitle && (
-                                <p className="text-ink-light dark:text-zinc-400 font-serif text-lg leading-relaxed line-clamp-3 mb-4">
+                                <div className="text-sm font-sans text-slate-400 italic mb-4">
                                     {word.subtitle}
-                                </p>
+                                </div>
                             )}
+                            
+                            <div className="text-slate-600 dark:text-slate-300 font-serif leading-relaxed line-clamp-3 mb-4">
+                                <MDXContent />
+                            </div>
 
                             <Link 
                                 href={`${basePath}/${wordSlug}`}
@@ -68,7 +78,7 @@ export default function WordsPage() {
                             >
                                 {UI_TEXT.buttons.readEntry} <ArrowRight size={14} />
                             </Link>
-                        </article>
+                        </div>
                     );
                 })}
             </div>
