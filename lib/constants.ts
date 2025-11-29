@@ -5,10 +5,9 @@ export const SITE_COPYRIGHT = 'Wanderlog';
 
 // Favorite content slugs
 export const FAVORITE_SLUGS = [
-  'words/all-our-yesterdays',
-  'engineering/project-converge',
-  // 'posts/architecture-of-silence',
-  'library/common-sense',
+  'words/2025-07-all-our-yesterdays',
+  'engineering/2025-10-converge-high-level-design',
+  'library/2023-07-common-sense',
 ];
 
 // Page configurations

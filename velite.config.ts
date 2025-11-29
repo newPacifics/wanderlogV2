@@ -9,7 +9,7 @@ const posts = defineCollection({
     author: s.string().optional(),
     date: s.string(),
     tags: s.array(s.string()),
-    readingTime: s.string(),
+    readingTime: s.string().optional(),
     description: s.string().optional(),
     content: s.mdx(),
     slug: s.path(),
