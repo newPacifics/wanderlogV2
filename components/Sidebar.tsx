@@ -46,10 +46,17 @@ export function Sidebar({ isOpen, setIsOpen, theme, toggleTheme }: SidebarProps)
             >
                 {/* Header */}
                 <div className="p-8 pb-4 flex justify-between items-center">
-                    <Link href="/" className="group">
-                        <h1 className="text-2xl font-serif font-bold tracking-tight text-ink dark:text-white group-hover:opacity-80 transition-opacity">
-                            {SITE_NAME}
-                        </h1>
+                    <img 
+                        src="/logo.svg" 
+                        alt="Wanderlog logo" 
+                        className="absolute -ml-[5px] opacity-20 dark:opacity-15 group-hover:opacity-25 dark:group-hover:opacity-20 transition-opacity duration-300 w-[235px] h-[64px] object-cover"
+                    />
+                    <Link href="/" className="group relative block">
+                        <div className="relative flex items-center h-12">
+                            <h1 className="relative text-3xl font-serif font-bold tracking-tight text-ink dark:text-white group-hover:opacity-80 transition-all duration-300 z-10">
+                                {SITE_NAME}
+                            </h1>
+                        </div>
                     </Link>
                     <button onClick={() => setIsOpen(false)} className="md:hidden text-ink-light hover:text-ink transition-colors">
                         <X size={20} />

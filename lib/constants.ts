@@ -15,7 +15,7 @@ export const PAGES = {
   home: {
     title: 'Sev@LOG',
     titleContinued: '$> print \"\I wander\"',
-    intro1: 'A wanderer\'s log for slow thinking, curated words, and engineered artifacts.',
+    intro1: '',
     recentlyTendedLabel: 'Recently Tended',
   },
   engineering: {

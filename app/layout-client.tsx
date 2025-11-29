@@ -37,7 +37,14 @@ export function LayoutClient({ children }: LayoutClientProps) {
         <div className="min-h-screen flex bg-paper-100 dark:bg-zinc-900 transition-colors duration-500 text-ink dark:text-ink-dark">
             {/* Mobile Header */}
             <header className="md:hidden fixed top-0 left-0 right-0 h-16 bg-paper-50/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-paper-200 dark:border-zinc-800 z-30 flex items-center px-6 justify-between transition-all">
-                <span className="text-xl font-serif font-bold text-ink dark:text-white">{SITE_NAME}</span>
+                <div className="relative flex items-center h-10">
+                    <img 
+                        src="/logo.svg" 
+                        alt="Wanderlog logo" 
+                        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 dark:opacity-15 w-[250px] h-[40px] object-cover"
+                    />
+                    <span className="relative text-xl font-serif font-bold text-ink dark:text-white z-10">{SITE_NAME}</span>
+                </div>
                 <button onClick={() => setSidebarOpen(true)} className="p-2 -mr-2 text-ink-light hover:text-ink transition-colors">
                     <Menu size={24} />
                 </button>
