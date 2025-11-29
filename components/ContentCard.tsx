@@ -20,6 +20,17 @@ export default function ContentCard({
     linkWrapsCard,
     author
 }: ContentCardProps) {
+    const titleSection = (
+        <h3 className="text-xl font-serif font-medium text-ink dark:text-zinc-200 leading-snug group-hover:text-leaf transition-colors">
+            {title}
+            {author && (
+                <span className="text-sm text-ink-light/70 dark:text-zinc-500/70 italic font-normal ml-2">
+                    by {author}
+                </span>
+            )}
+        </h3>
+    );
+
     const cardContent = (
         <div className="flex-1 bg-paper-50 dark:bg-zinc-800/40 p-6 rounded-xl border border-paper-200 dark:border-zinc-800 group-hover:border-leaf/30 dark:group-hover:border-leaf/30 group-hover:shadow-sm transition-all duration-300">
             <div className="flex justify-between items-start mb-4">
@@ -29,16 +40,15 @@ export default function ContentCard({
                 <span className="text-xs font-serif text-ink-light/50">{date}</span>
             </div>
             
-            <Link href={href} className="block mb-3">
-                <h3 className="text-xl font-serif font-medium text-ink dark:text-zinc-200 leading-snug group-hover:text-leaf transition-colors">
-                    {title}
-                    {author && (
-                        <span className="text-sm text-ink-light/70 dark:text-zinc-500/70 italic font-normal ml-2">
-                            by {author}
-                        </span>
-                    )}
-                </h3>
-            </Link>
+            {linkWrapsCard ? (
+                <div className="mb-3">
+                    {titleSection}
+                </div>
+            ) : (
+                <Link href={href} className="block mb-3">
+                    {titleSection}
+                </Link>
+            )}
             
             <div className="text-sm text-ink-light dark:text-zinc-500 line-clamp-3 leading-relaxed">
                 {preview}
