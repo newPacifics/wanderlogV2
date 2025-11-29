@@ -56,9 +56,10 @@ const engineering = defineCollection({
     author: s.string().optional(),
     date: s.string(),
     tags: s.array(s.string()),
-    componentKey: s.string(),
-    description: s.string(),
-    instructions: s.string(),
+    componentKey: s.string().optional(),
+    description: s.string().optional(),
+    instructions: s.string().optional(),
+    content: s.mdx(),
     slug: s.path(),
   }).transform(data => ({ ...data, type: 'demo' as const })),
 });

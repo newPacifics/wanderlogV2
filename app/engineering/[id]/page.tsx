@@ -1,4 +1,5 @@
 import React from 'react';
+import * as runtime from 'react/jsx-runtime';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
@@ -14,6 +15,10 @@ export default async function DemoDetailPage({ params }: { params: Promise<{ id:
     if (!demo) {
         notFound();
     }
+    
+    // Create the MDX component from the content string
+    const getMDXContent = new Function(demo.content);
+    const MDXContent = getMDXContent({ React, ...runtime }).default;
 
     return (
         <article className="max-w-3xl mx-auto py-16 px-6 md:px-12 animate-fade-in">
@@ -39,16 +44,26 @@ export default async function DemoDetailPage({ params }: { params: Promise<{ id:
             </header>
 
             <div className="space-y-10 animate-slide-up">
-                <p className="font-serif text-xl text-ink dark:text-zinc-300 max-w-2xl leading-relaxed">{demo.description}</p>
+                {demo.description && (
+                    <p className="font-serif text-xl text-ink dark:text-zinc-300 max-w-2xl leading-relaxed">{demo.description}</p>
+                )}
                 
-                <div className="my-12">
-                     {demo.componentKey === 'sorting-viz' && <SortingVisualizer isActive={true} />}
-                     {demo.componentKey === 'fractal-tree' && <FractalTree />}
-                </div>
+                {demo.componentKey && (
+                    <div className="my-12">
+                        {demo.componentKey === 'sorting-viz' && <SortingVisualizer isActive={true} />}
+                        {demo.componentKey === 'fractal-tree' && <FractalTree />}
+                    </div>
+                )}
 
-                <div className="bg-paper-50 dark:bg-zinc-800/50 p-6 rounded-lg border border-paper-200 dark:border-zinc-800 text-sm text-ink-light dark:text-zinc-400 font-mono">
-                    <strong className="text-ink dark:text-zinc-200">{UI_TEXT.labels.instructions}:</strong> {demo.instructions}
-                </div>
+                {demo.instructions && (
+                    <div className="bg-paper-50 dark:bg-zinc-800/50 p-6 rounded-lg border border-paper-200 dark:border-zinc-800 text-sm text-ink-light dark:text-zinc-400 font-mono">
+                        <strong className="text-ink dark:text-zinc-200">{UI_TEXT.labels.instructions}:</strong> {demo.instructions}
+                    </div>
+                )}
+            </div>
+
+            <div className="prose prose-lg dark:prose-invert font-serif prose-blue max-w-none prose-headings:font-serif prose-headings:font-medium prose-p:leading-loose prose-a:no-underline prose-a:border-b prose-a:border-current hover:prose-a:opacity-70 transition-all mt-10">
+                <MDXContent />
             </div>
 
             {/* Tags Footer */}
