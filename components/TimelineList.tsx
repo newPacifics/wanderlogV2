@@ -10,7 +10,7 @@ interface TimelineItem {
     tags: string[];
     description?: string;
     summary?: string;
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
 interface TimelineListProps {

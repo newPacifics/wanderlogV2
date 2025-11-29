@@ -5,6 +5,7 @@ import { PAGES, UI_TEXT } from '../../lib/constants';
 import CollectionPageContainer from '../../components/CollectionPageContainer';
 import CollectionPageHeader from '../../components/CollectionPageHeader';
 import TimelineList from '../../components/TimelineList';
+import { Book } from '../../.velite';
 
 export default function LibraryPage() {
     const items = library;
@@ -27,16 +28,19 @@ export default function LibraryPage() {
                 accentColor={accentColor}
                 buttonText={UI_TEXT.buttons.readEntry}
                 slugPrefix="library"
-                renderCustomContent={(book: any) => (
-                    <div className="flex items-center gap-1 text-amber-500/80 mb-3">
-                        {Array.from({ length: book.rating }).map((_, i) => (
-                            <Star key={i} size={12} fill="currentColor" />
-                        ))}
-                        <span className="text-sm text-ink-light dark:text-zinc-500 ml-2 font-serif italic">
-                            {UI_TEXT.labels.by} {book.author}
-                        </span>
-                    </div>
-                )}
+                renderCustomContent={(item) => {
+                    const book = item as Book;
+                    return (
+                        <div className="flex items-center gap-1 text-amber-500/80 mb-3">
+                            {Array.from({ length: book.rating }).map((_, i) => (
+                                <Star key={i} size={12} fill="currentColor" />
+                            ))}
+                            <span className="text-sm text-ink-light dark:text-zinc-500 ml-2 font-serif italic">
+                                {UI_TEXT.labels.by} {book.author}
+                            </span>
+                        </div>
+                    );
+                }}
             />
         </CollectionPageContainer>
     );

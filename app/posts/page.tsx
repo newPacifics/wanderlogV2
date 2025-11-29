@@ -14,7 +14,7 @@ export default function PostsPage() {
     const basePath = PAGES.posts.basePath;
 
     // Render MDX content preview with fade effect
-    const renderDescription = (item: any) => {
+    const renderDescription = (item: Record<string, unknown>) => {
         // Check if item has content property
         if ('content' in item && item.content) {
             const getMDXContent = new Function(item.content);
@@ -52,7 +52,7 @@ export default function PostsPage() {
                 accentColor={accentColor}
                 buttonText={UI_TEXT.buttons.readEntry}
                 slugPrefix="posts"
-                renderDescription={renderDescription}
+                renderDescription={renderDescription} 
             />
         </CollectionPageContainer>
     );
