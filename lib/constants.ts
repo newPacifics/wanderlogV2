@@ -3,6 +3,14 @@ export const SITE_NAME = 'Wanderlog';
 export const SITE_TAGLINE = 'Floating logs of ideas, drafts, and experiments.';
 export const SITE_COPYRIGHT = 'Wanderlog';
 
+// Favorite content slugs
+export const FAVORITE_SLUGS = [
+  'words/all-our-yesterdays',
+  'engineering/project-converge',
+  // 'posts/architecture-of-silence',
+  'library/common-sense',
+];
+
 // Page configurations
 export const PAGES = {
   home: {
