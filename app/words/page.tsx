@@ -1,7 +1,7 @@
 import React from 'react';
 import * as runtime from 'react/jsx-runtime';
 import Link from 'next/link';
-import { words } from '../../.velite';
+import { words } from '../../lib/data';
 import { ArrowRight } from 'lucide-react';
 import { PAGES, UI_TEXT } from '../../lib/constants';
 import CollectionPageContainer from '../../components/CollectionPageContainer';

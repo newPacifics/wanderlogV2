@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { library } from '../../.velite';
+import { library } from '../../lib/data';
 import { ArrowRight, Star } from 'lucide-react';
 import { PAGES, UI_TEXT } from '../../lib/constants';
 import CollectionPageContainer from '../../components/CollectionPageContainer';

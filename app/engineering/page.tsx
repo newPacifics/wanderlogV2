@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { engineering } from '../../.velite';
+import { engineering } from '../../lib/data';
 import { ArrowRight } from 'lucide-react';
 import { PAGES, UI_TEXT } from '../../lib/constants';
 import CollectionPageContainer from '../../components/CollectionPageContainer';
