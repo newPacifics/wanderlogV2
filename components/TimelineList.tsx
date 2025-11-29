@@ -33,7 +33,7 @@ export default function TimelineList({
     renderDescription,
 }: TimelineListProps) {
     return (
-        <div className="space-y-16">
+        <div className="space-y-20">
             {items.length === 0 && <EmptyState />}
             
             {items.map((item) => {
@@ -41,14 +41,15 @@ export default function TimelineList({
                 const itemSlug = item.slug.replace(`${slugPrefix}/`, '');
                 
                 return (
-                    <article key={item.slug} className="group relative pl-8 border-l border-paper-200 dark:border-zinc-800 hover:border-leaf/50 dark:hover:border-leaf/50 transition-colors duration-300">
-                        <div className="absolute -left-[5px] top-0 w-[9px] h-[9px] rounded-full bg-paper-200 dark:bg-zinc-800 group-hover:bg-leaf transition-colors duration-300" />
+                    <article key={item.slug} className="group relative pl-8 border-l-2 border-paper-200 dark:border-zinc-800 hover:border-leaf/50 dark:hover:border-leaf/50 transition-all duration-300 -ml-px">
+                        <div className="absolute -left-[7px] top-0 w-[13px] h-[13px] rounded-full bg-paper-200 dark:bg-zinc-800 group-hover:bg-leaf group-hover:scale-110 transition-all duration-300 ring-4 ring-paper-100 dark:ring-zinc-900" />
                         
-                        <div className="flex flex-col gap-3 mb-3">
+                        <div className="group-hover:bg-paper-50/50 dark:group-hover:bg-zinc-800/20 -ml-4 pl-4 -mr-4 pr-4 py-2 rounded-lg transition-colors duration-300">
+                            <div className="flex flex-col gap-3 mb-3">
                             <div className="flex items-center gap-3 text-[10px] font-sans font-bold tracking-widest uppercase text-ink-light dark:text-zinc-500">
                                 <span>{item.date}</span>
                                 {item.tags.slice(0, 3).map(tag => (
-                                    <span key={tag} className="px-1.5 py-0.5 rounded-sm bg-paper-100 dark:bg-zinc-800/50">
+                                    <span key={tag} className="px-1.5 py-0.5 rounded-sm bg-paper-100/50 dark:bg-zinc-800/30 text-ink-light/40 dark:text-zinc-500/40">
                                         {tag}
                                     </span>
                                 ))}
@@ -77,6 +78,7 @@ export default function TimelineList({
                         >
                             {buttonText} <ArrowRight size={14} />
                         </Link>
+                        </div>
                     </article>
                 );
             })}

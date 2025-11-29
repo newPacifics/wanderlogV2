@@ -3,7 +3,7 @@
 
 ## Overview
 
-Consolidate the nearly identical timeline list implementations from Library, Posts, and Engineering pages into a single reusable `TimelineList` component. 
+Consolidate the nearly identical timeline list implementations from Library, Posts, and Engineering pages into a single reusable `TimelineList` component.
 
 ## Current State
 

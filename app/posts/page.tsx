@@ -1,4 +1,5 @@
 import React from 'react';
+import * as runtime from 'react/jsx-runtime';
 import { posts } from '../../lib/data';
 import { PAGES, UI_TEXT } from '../../lib/constants';
 import CollectionPageContainer from '../../components/CollectionPageContainer';
@@ -11,6 +12,31 @@ export default function PostsPage() {
     const description = PAGES.posts.description;
     const accentColor = PAGES.posts.accentColor;
     const basePath = PAGES.posts.basePath;
+
+    // Render MDX content preview with fade effect
+    const renderDescription = (item: any) => {
+        // Check if item has content property
+        if ('content' in item && item.content) {
+            const getMDXContent = new Function(item.content);
+            const MDXContent = getMDXContent({ React, ...runtime }).default;
+            
+            return (
+                <div className="relative mb-4">
+                    <div className="line-clamp-4 prose dark:prose-invert text-ink-light dark:text-zinc-400 leading-relaxed">
+                        <MDXContent />
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-paper-100 dark:from-zinc-900 to-transparent pointer-events-none" />
+                </div>
+            );
+        }
+        
+        // Fallback for items without content
+        return (
+            <p className="text-ink-light dark:text-zinc-400 font-serif text-lg leading-relaxed line-clamp-3 mb-4">
+                {item.description || ''}
+            </p>
+        );
+    };
 
     return (
         <CollectionPageContainer>
@@ -26,6 +52,7 @@ export default function PostsPage() {
                 accentColor={accentColor}
                 buttonText={UI_TEXT.buttons.readEntry}
                 slugPrefix="posts"
+                renderDescription={renderDescription}
             />
         </CollectionPageContainer>
     );
