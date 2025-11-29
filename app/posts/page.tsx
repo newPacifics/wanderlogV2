@@ -5,6 +5,7 @@ import { PAGES, UI_TEXT } from '../../lib/constants';
 import CollectionPageContainer from '../../components/CollectionPageContainer';
 import CollectionPageHeader from '../../components/CollectionPageHeader';
 import TimelineList from '../../components/TimelineList';
+import { Post } from '../../.velite';
 
 export default function PostsPage() {
     const items = posts;
@@ -15,9 +16,10 @@ export default function PostsPage() {
 
     // Render MDX content preview with fade effect
     const renderDescription = (item: Record<string, unknown>) => {
+        const post = item as Post;
         // Check if item has content property
-        if ('content' in item && item.content) {
-            const getMDXContent = new Function(item.content);
+        if ('content' in post && post.content && typeof post.content === 'string') {
+            const getMDXContent = new Function(post.content);
             const MDXContent = getMDXContent({ React, ...runtime }).default;
             
             return (
@@ -33,7 +35,7 @@ export default function PostsPage() {
         // Fallback for items without content
         return (
             <p className="text-ink-light dark:text-zinc-400 font-serif text-lg leading-relaxed line-clamp-3 mb-4">
-                {item.description || ''}
+                {post.description || ''}
             </p>
         );
     };
