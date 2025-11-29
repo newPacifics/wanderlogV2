@@ -6,6 +6,7 @@ const posts = defineCollection({
   pattern: 'posts/**/*.mdx',
   schema: s.object({
     title: s.string(),
+    author: s.string().optional(),
     date: s.string(),
     tags: s.array(s.string()),
     readingTime: s.string(),
@@ -21,6 +22,7 @@ const words = defineCollection({
   pattern: 'words/**/*.mdx',
   schema: s.object({
     title: s.string(),
+    author: s.string().optional(),
     subtitle: s.string().optional(),
     date: s.string(),
     tags: s.array(s.string()),
@@ -51,6 +53,7 @@ const engineering = defineCollection({
   pattern: 'engineering/**/*.mdx',
   schema: s.object({
     title: s.string(),
+    author: s.string().optional(),
     date: s.string(),
     tags: s.array(s.string()),
     componentKey: s.string(),

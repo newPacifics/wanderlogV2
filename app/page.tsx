@@ -3,37 +3,27 @@ import * as runtime from 'react/jsx-runtime';
 import Link from 'next/link';
 import { ALL_CONTENT, favorites } from '../lib/data';
 import { ArrowRight } from 'lucide-react';
-import { PostContent, WordContent, BookContent, DemoContent } from '../lib/types';
+import { BookContent } from '../lib/types';
 import { PAGES, UI_TEXT } from '../lib/constants';
+import ContentCard from '../components/ContentCard';
 
 export default function HomePage() {
     const recent = ALL_CONTENT.slice(0, 3);
 
-    // Helper function to render content preview
+    // Helper function to render content preview - always uses MDX content
     const renderContentPreview = (item: typeof ALL_CONTENT[0]) => {
-        // For word type, render MDX content
-        if (item.type === 'word') {
-            const wordItem = item as WordContent;
-            const getMDXContent = new Function(wordItem.content);
+        // Check if item has content property (words, posts, demos have it; books might not)
+        if ('content' in item && item.content) {
+            const getMDXContent = new Function(item.content);
             const MDXContent = getMDXContent({ React, ...runtime }).default;
-            return (
-                <div className="text-sm text-ink-light dark:text-zinc-500 line-clamp-3 leading-relaxed">
-                    <MDXContent />
-                </div>
-            );
+            return <MDXContent />;
         }
         
-        // For other types, use description or summary
-        let description = item.description;
-        if (!description && item.type === 'book') {
-            description = (item as BookContent).summary;
+        // Fallback for items without MDX content (legacy)
+        if (item.type === 'book') {
+            return <>{(item as BookContent).summary}</>;
         }
-        
-        return (
-            <p className="text-sm text-ink-light dark:text-zinc-500 line-clamp-3 leading-relaxed">
-                {description}
-            </p>
-        );
+        return <>{item.description}</>;
     };
 
     // Helper function to render a content card
@@ -43,26 +33,16 @@ export default function HomePage() {
         const path = `/${item.type === 'book' ? 'library' : item.type === 'demo' ? 'engineering' : item.type + 's'}/${slugWithoutPrefix}`;
         
         return (
-            <Link 
-                key={item.slug} 
+            <ContentCard
+                key={item.slug}
+                label={item.type}
+                date={item.date}
+                title={item.title}
+                preview={renderContentPreview(item)}
                 href={path}
-                className="group flex flex-col h-full"
-            >
-                <div className="flex-1 bg-paper-50 dark:bg-zinc-800/40 p-6 rounded-xl border border-paper-200 dark:border-zinc-800 group-hover:border-leaf/30 dark:group-hover:border-leaf/30 group-hover:shadow-sm transition-all duration-300">
-                    <div className="flex justify-between items-start mb-4">
-                        <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-leaf bg-leaf/10 px-2 py-1 rounded-sm">
-                            {item.type}
-                        </span>
-                        <span className="text-xs font-serif text-ink-light/50">{item.date}</span>
-                    </div>
-                    
-                    <h3 className="font-serif text-xl font-medium text-ink dark:text-zinc-200 mb-3 leading-snug group-hover:text-leaf transition-colors">
-                        {item.title}
-                    </h3>
-                    
-                    {renderContentPreview(item)}
-                </div>
-            </Link>
+                linkWrapsCard={true}
+                author={item.author}
+            />
         );
     };
 
