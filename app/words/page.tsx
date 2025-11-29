@@ -37,41 +37,30 @@ export default function WordsPage() {
                     return (
                         <div 
                             key={word.slug} 
-                            className="p-6 rounded-xl bg-white dark:bg-white/5 border border-slate-100 dark:border-white/5 hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-300 shadow-sm hover:shadow-md group"
+                            className="p-6 rounded-xl bg-paper-50 dark:bg-zinc-800/40 border border-paper-200 dark:border-zinc-800 hover:border-leaf/30 dark:hover:border-leaf/30 hover:shadow-sm transition-all duration-300 group"
                         >
-                            <div className="flex justify-between items-start mb-2">
-                                <Link href={`${basePath}/${wordSlug}`} className="block">
-                                    <h3 className="text-xl font-serif font-bold text-ink dark:text-chalk group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">
-                                        {word.title}
-                                    </h3>
-                                </Link>
-                                {word.tags.length > 0 && (
-                                    <span className="text-xs font-mono text-slate-400 bg-slate-50 dark:bg-black/20 px-2 py-1 rounded">
-                                        {word.tags[0]}
-                                    </span>
-                                )}
+                            <div className="flex justify-between items-start mb-4">
+                                <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-leaf bg-leaf/10 px-2 py-1 rounded-sm">
+                                    {word.tags[0]}
+                                </span>
+                                <span className="text-xs font-serif text-ink-light/50">{word.date}</span>
                             </div>
                             
-                            <div className="text-xs font-sans text-slate-400 mb-2">
-                                {word.date}
-                            </div>
+                            <Link href={`${basePath}/${wordSlug}`} className="block mb-3">
+                                <h3 className="text-xl font-serif font-medium text-ink dark:text-zinc-200 leading-snug group-hover:text-leaf transition-colors">
+                                    {word.title}
+                                </h3>
+                            </Link>
                             
                             {word.subtitle && (
-                                <div className="text-sm font-sans text-slate-400 italic mb-4">
+                                <div className="text-sm font-sans text-ink-light dark:text-zinc-500 italic mb-3">
                                     {word.subtitle}
                                 </div>
                             )}
                             
-                            <div className="text-slate-600 dark:text-slate-300 font-serif leading-relaxed line-clamp-4 mb-4">
-                                <MDXContent />
+                            <div className="text-sm text-ink-light dark:text-zinc-500 line-clamp-3 leading-relaxed">
+                                {word.description || <MDXContent />}
                             </div>
-
-                            <Link 
-                                href={`${basePath}/${wordSlug}`}
-                                className={`inline-flex items-center gap-1 text-xs font-sans font-bold uppercase tracking-wider hover:gap-2 transition-all ${accentColor}`}
-                            >
-                                {UI_TEXT.buttons.readEntry} <ArrowRight size={14} />
-                            </Link>
                         </div>
                     );
                 })}
