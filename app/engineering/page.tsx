@@ -1,8 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { engineering } from '../../.velite';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { PAGES, UI_TEXT } from '../../lib/constants';
+import CollectionPageContainer from '../../components/CollectionPageContainer';
+import CollectionPageHeader from '../../components/CollectionPageHeader';
+import EmptyState from '../../components/EmptyState';
 
 export default function EngineeringPage() {
     const items = engineering;
@@ -12,24 +15,15 @@ export default function EngineeringPage() {
     const basePath = PAGES.engineering.basePath;
 
     return (
-        <div className="max-w-3xl mx-auto py-20 px-6 animate-fade-in">
-            <header className="mb-20">
-                <div className="flex items-center gap-2 mb-4 text-ink-light dark:text-zinc-500">
-                    <Sparkles size={16} />
-                    <span className="text-xs font-sans uppercase tracking-widest">{items.length} {UI_TEXT.labels.entries}</span>
-                </div>
-                <h1 className="text-5xl md:text-6xl font-serif font-medium mb-6 text-ink dark:text-white tracking-tight">{title}</h1>
-                <p className="text-xl text-ink-light dark:text-zinc-400 font-serif leading-relaxed max-w-2xl border-l-2 border-paper-300 dark:border-zinc-700 pl-6">
-                    {description}
-                </p>
-            </header>
+        <CollectionPageContainer>
+            <CollectionPageHeader 
+                title={title}
+                description={description}
+                itemCount={items.length}
+            />
 
             <div className="space-y-16">
-                {items.length === 0 && (
-                    <div className="p-12 text-center bg-paper-50 dark:bg-zinc-800/30 rounded-lg border border-paper-200 dark:border-zinc-800">
-                        <p className="text-ink-light italic font-serif text-lg">{UI_TEXT.emptyState}</p>
-                    </div>
-                )}
+                {items.length === 0 && <EmptyState />}
                 
                 {items.map((demo) => {
                     // Extract the slug without the 'engineering/' prefix
@@ -70,7 +64,7 @@ export default function EngineeringPage() {
                     );
                 })}
             </div>
-        </div>
+        </CollectionPageContainer>
     );
 }
 
