@@ -49,9 +49,23 @@ export default function HomePage() {
     return (
         <div className="max-w-10xl mx-auto py-10 px-6 md:px-12 animate-fade-in">
             <section className="mb-14">
-                <h1 className="text-5xl md:text-7xl font-serif font-medium text-ink dark:text-white mb-8 tracking-tight leading-[1.1]">
-                    {PAGES.home.title}
-                </h1>
+                <div className="relative mb-8 flex items-center justify-center">
+                    {/* Video Background */}
+                    <video 
+                        autoPlay 
+                        muted 
+                        playsInline
+                        className="absolute top-1/2 -translate-y-1/2 w-full h-[125%] object-cover opacity-[0.8] dark:opacity-[0.2] pointer-events-none"
+                        style={{ filter: 'blur(0.8px)' }}
+                    >
+                        <source src="/home-title-animation-bg.mp4" type="video/mp4" />
+                    </video>
+                    
+                    {/* Title */}
+                    <h1 className="relative text-5xl md:text-7xl font-serif font-medium text-ink dark:text-white tracking-tight leading-[1.1] z-10 bg-paper-50/90 dark:bg-zinc-950/90 backdrop-blur-sm px-6 py-4 rounded-lg text-center">
+                        {PAGES.home.title}
+                    </h1>
+                </div>
                 <div className="prose prose-xl dark:prose-invert font-serif text-ink-light dark:text-zinc-400 max-w-2xl leading-relaxed">
                     <p>
                         {PAGES.home.intro1}
