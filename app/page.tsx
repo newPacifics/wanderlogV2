@@ -50,7 +50,7 @@ export default function HomePage() {
         <div className="max-w-10xl mx-auto py-10 px-6 md:px-12 animate-fade-in">
             <section className="mb-14">
                 <h1 className="text-5xl md:text-7xl font-serif font-medium text-ink dark:text-white mb-8 tracking-tight leading-[1.1]">
-                    {PAGES.home.title}<br className="hidden md:block" /> {PAGES.home.titleContinued}
+                    {PAGES.home.title}
                 </h1>
                 <div className="prose prose-xl dark:prose-invert font-serif text-ink-light dark:text-zinc-400 max-w-2xl leading-relaxed">
                     <p>
