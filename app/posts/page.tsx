@@ -24,7 +24,7 @@ export default function PostsPage() {
             
             return (
                 <div className="relative mb-4">
-                    <div className="line-clamp-4 prose dark:prose-invert text-ink-light dark:text-zinc-400 leading-relaxed">
+                    <div className="line-clamp-4 prose dark:prose-invert text-lg text-ink-light dark:text-zinc-400 leading-relaxed">
                         <MDXContent />
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-paper-100 dark:from-zinc-900 to-transparent pointer-events-none" />

@@ -1,5 +1,5 @@
 // Site-wide constants
-export const SITE_NAME = 'Wanderlog';
+export const SITE_NAME = 'wander.log';
 export const SITE_TAGLINE = 'Floating logs of ideas, drafts, and experiments.';
 export const SITE_COPYRIGHT = 'Wanderlog';
 
@@ -7,14 +7,13 @@ export const SITE_COPYRIGHT = 'Wanderlog';
 export const FAVORITE_SLUGS = [
   'words/2025-07-all-our-yesterdays',
   'engineering/2025-10-converge-high-level-design',
-  'library/2023-07-common-sense',
+  'library/2014-07-common-sense',
 ];
 
 // Page configurations
 export const PAGES = {
   home: {
-    title: 'Sev@LOG',
-    titleContinued: '$> print \"\I wander\"',
+    title: '/sev/log/wander',
     intro1: '',
     recentlyTendedLabel: 'Recently Tended',
   },
@@ -26,7 +25,7 @@ export const PAGES = {
   },
   library: {
     title: 'Library',
-    description: 'Notes, summaries, and marginalia from my reading log.',
+    description: 'Notes, summaries, and marginalia from my reading log. (auto-generated quotes)',
     accentColor: 'text-amber-700 dark:text-amber-300',
     basePath: '/library',
   },

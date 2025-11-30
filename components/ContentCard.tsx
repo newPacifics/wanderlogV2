@@ -50,7 +50,7 @@ export default function ContentCard({
                 </Link>
             )}
             
-            <div className="text-sm text-ink-light dark:text-zinc-500 line-clamp-3 leading-relaxed">
+            <div className="text-md text-ink-light dark:text-zinc-500 line-clamp-3 leading-relaxed">
                 {preview}
             </div>
         </div>
