@@ -62,7 +62,7 @@ export default function HomePage() {
             {/* Favorites Section */}
             {favorites.length > 0 && (
                 <section className="mb-20">
-                    <div className="flex items-center justify-between mb-4 border-b border-paper-200 dark:border-zinc-800">
+                    <div className="flex items-center justify-between mb-4">
                         <h2 className="text-xs font-sans font-semibold uppercase tracking-widest text-ink-light dark:text-zinc-500">Favorites</h2>
                     </div>
                     
@@ -74,7 +74,7 @@ export default function HomePage() {
 
             {/* Recently Tended Section */}
             <section>
-                <div className="flex items-center justify-between mb-4 border-b border-paper-200 dark:border-zinc-800">
+                <div className="flex items-center justify-between mb-4">
                     <h2 className="text-xs font-sans font-semibold uppercase tracking-widest text-ink-light dark:text-zinc-500">{PAGES.home.recentlyTendedLabel}</h2>
                     <Link href="/posts" className="text-xs font-sans font-medium uppercase tracking-wider text-leaf hover:text-ink transition-colors flex items-center gap-1">
                         {UI_TEXT.buttons.viewArchive} <ArrowRight size={12} />

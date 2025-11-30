@@ -36,7 +36,7 @@ export const PAGES = {
     basePath: '/posts',
   },
   words: {
-    title: 'Lexicon',
+    title: 'Words',
     description: 'A collection of beautiful, specific, or untranslatable words.',
     accentColor: 'text-emerald-700 dark:text-emerald-300',
     basePath: '/words',
@@ -47,7 +47,7 @@ export const PAGES = {
 export const NAV_LABELS = {
   overview: 'Overview',
   essays: 'Posts',
-  lexicon: 'Lexicon',
+  words: 'Words',
   library: 'Library',
   lab: 'Lab',
 } as const;

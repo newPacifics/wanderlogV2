@@ -17,7 +17,7 @@ interface SidebarProps {
 const NAV_ITEMS: NavItem[] = [
     { label: NAV_LABELS.overview, path: '/', icon: <Home size={18} /> },
     { label: NAV_LABELS.essays, path: '/posts', icon: <PenTool size={18} />, type: ContentType.POST },
-    { label: NAV_LABELS.lexicon, path: '/words', icon: <Hash size={18} />, type: ContentType.WORD },
+    { label: NAV_LABELS.words, path: '/words', icon: <Hash size={18} />, type: ContentType.WORD },
     { label: NAV_LABELS.library, path: '/library', icon: <BookOpen size={18} />, type: ContentType.BOOK },
     { label: NAV_LABELS.lab, path: '/engineering', icon: <Cpu size={18} />, type: ContentType.DEMO },
 ];
@@ -74,10 +74,24 @@ export function Sidebar({ isOpen, setIsOpen, theme, toggleTheme }: SidebarProps)
                 <nav className="flex-1 px-4 space-y-1 overflow-y-auto">
                     {NAV_ITEMS.map((item) => {
                         let activeColorClass = 'bg-paper-200 text-ink dark:bg-zinc-800 dark:text-white';
-                        if (item.type === ContentType.POST) activeColorClass = 'bg-blue-50 text-blue-900 dark:bg-blue-900/30 dark:text-blue-100';
-                        if (item.type === ContentType.WORD) activeColorClass = 'bg-emerald-50 text-emerald-900 dark:bg-emerald-900/30 dark:text-emerald-100';
-                        if (item.type === ContentType.BOOK) activeColorClass = 'bg-amber-50 text-amber-900 dark:bg-amber-900/30 dark:text-amber-100';
-                        if (item.type === ContentType.DEMO) activeColorClass = 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100';
+                        let iconColorClass = 'text-ink-light dark:text-zinc-400';
+                        
+                        if (item.type === ContentType.POST) {
+                            activeColorClass = 'bg-blue-50 text-blue-900 dark:bg-blue-900/30 dark:text-blue-100';
+                            iconColorClass = 'text-blue-600 dark:text-blue-400';
+                        }
+                        if (item.type === ContentType.WORD) {
+                            activeColorClass = 'bg-emerald-50 text-emerald-900 dark:bg-emerald-900/30 dark:text-emerald-100';
+                            iconColorClass = 'text-emerald-600 dark:text-emerald-400';
+                        }
+                        if (item.type === ContentType.BOOK) {
+                            activeColorClass = 'bg-amber-50 text-amber-900 dark:bg-amber-900/30 dark:text-amber-100';
+                            iconColorClass = 'text-amber-600 dark:text-amber-400';
+                        }
+                        if (item.type === ContentType.DEMO) {
+                            activeColorClass = 'bg-red-50 text-red-900 dark:bg-red-900/30 dark:text-red-100';
+                            iconColorClass = 'text-red-600 dark:text-red-400';
+                        }
 
                         const isActive = pathname === item.path || (item.path !== '/' && pathname?.startsWith(item.path));
 
@@ -94,7 +108,7 @@ export function Sidebar({ isOpen, setIsOpen, theme, toggleTheme }: SidebarProps)
                                     }
                                 `}
                             >
-                                <span className={`opacity-80 ${isActive ? 'scale-110' : ''} transition-transform duration-200`}>{item.icon}</span>
+                                <span className={`${iconColorClass} ${isActive ? 'scale-110' : 'opacity-80'} transition-transform duration-200`}>{item.icon}</span>
                                 <span className="font-sans tracking-wide">{item.label}</span>
                             </Link>
                         );
