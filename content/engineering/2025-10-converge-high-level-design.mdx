@@ -8,7 +8,54 @@ tags:
   - engineering
 ---
 
-### High-Level Overview
+## 1. Context & Problem Statement
+1. Motivation: Learn AI with more hands-on, end-to-end experience.
+2. Another motivation: Build fullstack application with recent cutting-edge, lightweight technologies.
+3. Idea: Something really useful, not necessarily richful in features. 
+Resume editing! I need it soon! Full resume generation? Unreliable. I want granular control
+over my own resume. However, I'd like it to "adapt" to different job posts.
+
+## 2. Architecture
+#### 2.1 LLM:
+1. Consult my witty buddies -- GPT, Gemini, Sonnet first.
+2. LangGraph over LangChain -- because there is cycle/feedback loop in the state machine.
+3. Model? I think GPT4o-mini is fine due to cost.
+4. Fine tune? I haven't learned much deep there yet. Not now.
+5. Cross-encoders and re-rankers? Yes, great optimization effects after experimentation.
+
+...
+
+#### 2.2 Frameworks:
+
+*Frontend:*
+
+1. Next.js. Zero cost. Fast development. Easy syntax, similar to React.js (wrapped around it).
+2. Tailwind CSS, fancy looking! Much better than the ones I used before. Utility class very neat, short and descriptive.
+3. shadcn/ui seems popular, not a bit deal for now. Will try.
+
+*Backend:*
+1. FastAPI seems really fast haha. Easy routing. Simple payload structure. Simple syntax. Standard RESTful.
+
+*Infra:*
+1. Vercel is ON FIRE! Zero cost. Fast deployment. Richful and useful features like dashboard, env setup, deployment, logs...
+It is serverless and on edge! Lightning fast UX and so cheap.
+2. AWS Lambda. Serverless, 15 mins runtime more than enough. Familarity so easy/fast to set up for me.
+
+## 3. High Level Decisions & Trade-offs:
+1. Need a separate GatewayService in backend to handle:
+     1. SSE to provide updates during data generation
+     2. May expand to rate limiter, load balancer later (some are built in on Vercel)
+2. Regular frontend, backend, serverless microservices.
+3. CAP? We need Partition and Availability. Then, low cost, low latency. Lastly, Consistency (no DB now, so worry-free).
+4. Also, need fast development and iteration.
+5. Top-notch minimalist UX/UI, very very important. Visuals, buttons, sizing, ratios are all to make users
+comfortable using this tool!
+6. Also, the generation performance needs to be great. But, LLM model is not my priority here. Plus, bigger model
+leads to much higher money cost. Not for now.
+
+
+
+### System Component Diagram
 
 ```
 ┌─────────────────────────────────────────────────────┐
