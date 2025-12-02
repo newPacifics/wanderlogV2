@@ -13,9 +13,9 @@ export const FAVORITE_SLUGS = [
 // Page configurations
 export const PAGES = {
   home: {
-    title: '/sev/log/wander',
+    title: '/severin/wander/log',
     intro1: '',
-    recentlyTendedLabel: 'Recently Tended',
+    recentlyTendedLabel: 'Recent',
   },
   engineering: {
     title: 'Laboratory',

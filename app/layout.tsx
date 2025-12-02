@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sev@Wanderlog",
+  title: "Severin\'s Wanderlog",
   description: "A calm, reading-focused personal website with a paper-like aesthetic, featuring essays, vocabulary, book notes, and engineering demonstrations.",
 };
 
